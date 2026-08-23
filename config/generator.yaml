@@ -1,0 +1,30 @@
+# Airline Flight Operations Data Platform — generator configuration
+# Counts come from scale.preset unless you uncomment overrides.
+
+project:
+  name: skyflow-airlines
+  source_system: skyflow_ops_v1
+
+run:
+  seed: 42
+  ingestion_date: null  # YYYY-MM-DD; null = today UTC
+  output_format: parquet  # parquet | csv
+  output_root: data/lake/raw
+  compression: snappy
+
+scale:
+  preset: demo  # demo | interview | large | xl
+  # Uncomment to override a preset value:
+  # flights: 100000
+  # customers: 80000
+
+calendar:
+  start_date: "2024-01-01"
+  end_date: "2025-12-31"
+  timezone: UTC
+
+operations:
+  on_time_rate: 0.72
+  delayed_rate: 0.23
+  cancelled_rate: 0.05
+  max_delay_minutes: 240

@@ -1,0 +1,10 @@
+# Module 1 — synthetic generator and tests
+python-dotenv>=1.0.1
+PyYAML>=6.0.2
+Faker>=33.0.0
+numpy>=2.1.0
+pandas>=2.2.0
+pyarrow>=18.0.0
+
+# Dev / test
+pytest>=8.3.0
