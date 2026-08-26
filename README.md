@@ -2,7 +2,7 @@
 
 End-to-end data platform for airline operations: synthetic source generation, S3 data lake, PySpark/Glue ETL, data quality, PostgreSQL dimensional warehouse, Airflow orchestration, event-driven AWS processing, and Power BI analytics.
 
-This repository is built **incrementally**. **Module 1 (this release) is the synthetic source generator and project foundation.** Later AWS/Glue/Airflow/warehouse modules are specified here but not implemented yet.
+This repository is built **incrementally**. **Modules 1–2 are implemented:** synthetic generator (canonical contracts + optional local lake) and a **multi-system operational source landing zone**. AWS/Glue/Airflow/warehouse modules are specified but not implemented yet.
 
 ## Why this architecture
 
@@ -18,11 +18,15 @@ This repository is built **incrementally**. **Module 1 (this release) is the syn
 | EventBridge / SQS / Lambda / SNS (later) | Event-driven + alerting | File-arrival processing and operational notifications |
 | Power BI (later) | Consumption | Data marts, not raw lake tables |
 
-## Current module
+## Current modules
 
 **Module 1 — Project foundation and synthetic source data generator**
 
-Produces 10 related datasets with foreign keys, operational realism (delays, cancellations, load factor, fares), `created_at`/`updated_at` watermarks, and Hive-style raw lake folders ready for a Glue crawler later.
+Produces 10 related datasets with foreign keys, operational realism, watermarks, and Hive-style raw lake folders.
+
+**Module 2 — Airline source data layer**
+
+Same datasets emitted as five operational systems (FOS, PSS, CRM, payments, MDM) with mixed formats, folder/naming conventions, full vs incremental batches, ingest metadata, and realistic data issues. Local only — **no S3**. See [docs/MODULE_02_SOURCE_LAYER.md](docs/MODULE_02_SOURCE_LAYER.md) and [docs/SOURCE_TO_TARGET.md](docs/SOURCE_TO_TARGET.md).
 
 ## Quick start (Module 1)
 
@@ -40,6 +44,14 @@ Expected: parquet files under `data/lake/raw/<entity>/ingestion_date=<date>/` pl
 
 See [docs/MODULE_01_GENERATOR.md](docs/MODULE_01_GENERATOR.md) for validation, troubleshooting, and interview talking points.
 
+## Quick start (Module 2)
+
+```bash
+python -m skyflow.sources.cli --config config/sources.yaml
+```
+
+Expected: mixed CSV/JSON/Parquet extracts under `data/sources/{fos,pss,crm,pay,mdm}/extract_date=2026-08-23|24|25/` plus `_run_manifest.json`.
+
 AWS account prep (IAM profile + S3 bucket, no uploader yet): [docs/AWS_SETUP.md](docs/AWS_SETUP.md).
 
 ## Project layout
@@ -49,8 +61,10 @@ config/                 # YAML + env-driven configuration
 docs/                   # Architecture, source contracts, module notes
 src/skyflow/            # Installable package
   generator/            # Module 1
+  sources/              # Module 2 operational extracts
 tests/
-data/lake/raw/          # Generated (gitignored)
+data/lake/raw/          # Module 1 lake (gitignored)
+data/sources/           # Module 2 landing (gitignored)
 sql/                    # Reserved for warehouse DDL (future)
 dags/                   # Reserved for Airflow (future)
 glue/                   # Reserved for Glue jobs (future)
@@ -59,27 +73,32 @@ infra/                  # Reserved for AWS IaC/scripts (future)
 
 ## Module roadmap (do not skip ahead)
 
-1. Synthetic generator + contracts — **done in this module**
-2. Local-to-S3 raw landing and lake conventions
-3. Glue crawler / Data Catalog (or local catalog equivalent)
-4. PySpark bronze → silver ETL
-5. Data quality, quarantine, audit tables
-6. PostgreSQL warehouse DDL (staging / warehouse / marts)
-7. Dimensional load: surrogate keys, SCD2, incremental watermark upserts
-8. Data marts
-9. Airflow DAGs
-10. EventBridge + SQS + Lambda + SNS
-11. Power BI semantic model
-12. End-to-end runbook and interview narrative
+1. Synthetic generator + contracts — **done**
+2. Multi-system local source landing (formats, CDC, defects) — **done**
+3. Ingest source extracts → locked local lake (mapping + parse); S3 later
+4. Glue crawler / Data Catalog (or local catalog equivalent)
+5. PySpark bronze → silver ETL
+6. Data quality, quarantine, audit tables
+7. PostgreSQL warehouse DDL (staging / warehouse / marts)
+8. Dimensional load: surrogate keys, SCD2, incremental watermark upserts
+9. Data marts
+10. Airflow DAGs
+11. EventBridge + SQS + Lambda + SNS
+12. Power BI semantic model
+13. End-to-end runbook and interview narrative
 
 ## Running architecture (living)
 
 ```
-Python/Faker  →  Synthetic sources  →  local lake RAW (Module 1)
-                                         ↓
-                              AWS S3 RAW (Module 2+)
-                                         ↓
-                         Glue Crawler → Glue Data Catalog
+Python/Faker  →  canonical datasets (Module 1)
+                    ↓
+         operational extracts data/sources (Module 2)
+                    ↓
+         ingest → local lake RAW (Module 3; not built)
+                    ↓
+              AWS S3 RAW (later)
+                    ↓
+         Glue Crawler → Glue Data Catalog
                                          ↓
                          Glue/PySpark ETL + DQ + quarantine
                                          ↓

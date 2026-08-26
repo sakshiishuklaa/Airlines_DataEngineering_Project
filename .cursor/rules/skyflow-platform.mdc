@@ -20,11 +20,16 @@ airlines, airports, aircraft, routes, customers, flights, bookings, payments, ba
 
 Every source table includes `created_at`, `updated_at` for later watermark-based incremental loads.
 
-## Lake layout (locked)
+## Lake layout (locked, Module 1)
 
 `data/lake/raw/{entity}/ingestion_date=YYYY-MM-DD/`
 Formats: parquet (default) and optional csv.
 Each generator run writes `_batch_manifest.json`.
+
+## Source landing (locked, Module 2)
+
+`data/sources/{fos|pss|crm|pay|mdm}/extract_date=YYYY-MM-DD/`
+Mixed CSV / JSON / JSONL / Parquet. No S3 in this module. Mapping: `docs/SOURCE_TO_TARGET.md`.
 
 ## Warehouse (planned, do not implement until that module)
 

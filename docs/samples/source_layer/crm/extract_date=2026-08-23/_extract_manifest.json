@@ -1,0 +1,39 @@
+{
+  "source_system": "customer",
+  "source_system_code": "crm",
+  "extract_date": "2026-08-23",
+  "extract_mode": "full",
+  "batch_id": "SKY20260823-A52AAA66",
+  "ingestion_timestamp": "2026-08-23T01:45:00+00:00",
+  "files": [
+    {
+      "source_system": "customer",
+      "source_system_code": "crm",
+      "entity": "customers",
+      "extract_mode": "full",
+      "extract_date": "2026-08-23",
+      "format": "csv",
+      "path": "data/tmp/module2_samples/sources/crm/extract_date=2026-08-23/PROD_CRM_CUSTOMERS_20260823_A52AAA66.csv",
+      "file_name": "PROD_CRM_CUSTOMERS_20260823_A52AAA66.csv",
+      "row_count": 40,
+      "batch_id": "SKY20260823-A52AAA66",
+      "defects": [
+        "phone_with_dashes",
+        "dob_us_date_format"
+      ]
+    },
+    {
+      "source_system": "customer",
+      "source_system_code": "crm",
+      "entity": "customer_feedback",
+      "extract_mode": "full",
+      "extract_date": "2026-08-23",
+      "format": "json",
+      "path": "data/tmp/module2_samples/sources/crm/extract_date=2026-08-23/PROD_CRM_FEEDBACK_20260823_A52AAA66.json",
+      "file_name": "PROD_CRM_FEEDBACK_20260823_A52AAA66.json",
+      "row_count": 1261,
+      "batch_id": "SKY20260823-A52AAA66",
+      "defects": []
+    }
+  ]
+}

@@ -45,6 +45,14 @@ data/lake/raw/_batch_manifest.json
 
 Later: `s3://$S3_LAKE_BUCKET/raw/...` with the same prefix shape so Glue crawlers do not require a redesign.
 
+## Source landing (locked in Module 2)
+
+```
+data/sources/<fos|pss|crm|pay|mdm>/extract_date=YYYY-MM-DD/
+```
+
+Mixed CSV / JSON / JSONL / Parquet. Canonical mapping: [SOURCE_TO_TARGET.md](SOURCE_TO_TARGET.md). Local only (no S3).
+
 ## Processing principles (later modules)
 
 - **Batch ingestion:** generator or S3 PutObject lands a dated partition.
@@ -53,8 +61,12 @@ Later: `s3://$S3_LAKE_BUCKET/raw/...` with the same prefix shape so Glue crawler
 - **SCD2:** dim_customer expires prior row (`is_current`, `valid_from`, `valid_to`) when loyalty/contact change.
 - **Quarantine:** DQ failures written to `rejected/` with reason codes; audit table records batch counts.
 
+## Operational sources (Module 2, local)
+
+Five systems land extracts under `data/sources/{code}/extract_date=YYYY-MM-DD/` with mixed CSV/JSON/Parquet, source-native column names, and ingest metadata. Mapping to the locked lake: [SOURCE_TO_TARGET.md](SOURCE_TO_TARGET.md). **No S3.**
+
 ## Module boundary
 
-**Implemented now:** Module 1 generator + contracts + local raw lake layout.
+**Implemented now:** Module 1 generator + contracts + local raw lake layout; Module 2 multi-system source landing.
 
-**Not implemented:** S3 upload, Glue, Spark ETL, DQ, PostgreSQL, Airflow, Lambda/SQS/SNS, Power BI.
+**Not implemented:** source→lake ingest, S3 upload, Glue, Spark ETL, DQ, PostgreSQL, Airflow, Lambda/SQS/SNS, Power BI.

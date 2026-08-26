@@ -26,6 +26,7 @@ build/
 
 # Data lake and generated artifacts (large)
 data/lake/
+data/sources/
 data/generated/
 data/tmp/
 *.parquet

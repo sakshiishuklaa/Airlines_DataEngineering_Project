@@ -1,0 +1,62 @@
+{
+  "source_system": "master_data",
+  "source_system_code": "mdm",
+  "extract_date": "2026-08-23",
+  "extract_mode": "full",
+  "batch_id": "SKY20260823-A52AAA66",
+  "ingestion_timestamp": "2026-08-23T01:10:00+00:00",
+  "files": [
+    {
+      "source_system": "master_data",
+      "source_system_code": "mdm",
+      "entity": "airlines",
+      "extract_mode": "full",
+      "extract_date": "2026-08-23",
+      "format": "csv",
+      "path": "data/tmp/module2_samples/sources/mdm/extract_date=2026-08-23/PROD_MDM_AIRLINES_20260823_A52AAA66.csv",
+      "file_name": "PROD_MDM_AIRLINES_20260823_A52AAA66.csv",
+      "row_count": 6,
+      "batch_id": "SKY20260823-A52AAA66",
+      "defects": []
+    },
+    {
+      "source_system": "master_data",
+      "source_system_code": "mdm",
+      "entity": "airports",
+      "extract_mode": "full",
+      "extract_date": "2026-08-23",
+      "format": "csv",
+      "path": "data/tmp/module2_samples/sources/mdm/extract_date=2026-08-23/PROD_MDM_AIRPORTS_20260823_A52AAA66.csv",
+      "file_name": "PROD_MDM_AIRPORTS_20260823_A52AAA66.csv",
+      "row_count": 12,
+      "batch_id": "SKY20260823-A52AAA66",
+      "defects": []
+    },
+    {
+      "source_system": "master_data",
+      "source_system_code": "mdm",
+      "entity": "aircraft",
+      "extract_mode": "full",
+      "extract_date": "2026-08-23",
+      "format": "parquet",
+      "path": "data/tmp/module2_samples/sources/mdm/extract_date=2026-08-23/PROD_MDM_AIRCRAFT_20260823_A52AAA66.parquet",
+      "file_name": "PROD_MDM_AIRCRAFT_20260823_A52AAA66.parquet",
+      "row_count": 16,
+      "batch_id": "SKY20260823-A52AAA66",
+      "defects": []
+    },
+    {
+      "source_system": "master_data",
+      "source_system_code": "mdm",
+      "entity": "routes",
+      "extract_mode": "full",
+      "extract_date": "2026-08-23",
+      "format": "csv",
+      "path": "data/tmp/module2_samples/sources/mdm/extract_date=2026-08-23/PROD_MDM_ROUTES_20260823_A52AAA66.csv",
+      "file_name": "PROD_MDM_ROUTES_20260823_A52AAA66.csv",
+      "row_count": 20,
+      "batch_id": "SKY20260823-A52AAA66",
+      "defects": []
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "source_system": "payment",
+  "source_system_code": "pay",
+  "extract_date": "2026-08-23",
+  "extract_mode": "full",
+  "batch_id": "SKY20260823-A52AAA66",
+  "ingestion_timestamp": "2026-08-23T03:05:00+00:00",
+  "files": [
+    {
+      "source_system": "payment",
+      "source_system_code": "pay",
+      "entity": "payments",
+      "extract_mode": "full",
+      "extract_date": "2026-08-23",
+      "format": "json",
+      "path": "data/tmp/module2_samples/sources/pay/extract_date=2026-08-23/PROD_PAY_SETTLEMENT_20260823_A52AAA66.json",
+      "file_name": "PROD_PAY_SETTLEMENT_20260823_A52AAA66.json",
+      "row_count": 4431,
+      "batch_id": "SKY20260823-A52AAA66",
+      "defects": [
+        "amount_as_string",
+        "lowercase_currency",
+        "missing_transaction_ref"
+      ]
+    }
+  ]
+}

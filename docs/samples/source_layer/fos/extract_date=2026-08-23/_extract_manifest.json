@@ -1,0 +1,43 @@
+{
+  "source_system": "flight_ops",
+  "source_system_code": "fos",
+  "extract_date": "2026-08-23",
+  "extract_mode": "full",
+  "batch_id": "SKY20260823-A52AAA66",
+  "ingestion_timestamp": "2026-08-23T02:15:00+00:00",
+  "files": [
+    {
+      "source_system": "flight_ops",
+      "source_system_code": "fos",
+      "entity": "flights",
+      "extract_mode": "full",
+      "extract_date": "2026-08-23",
+      "format": "parquet",
+      "path": "data/tmp/module2_samples/sources/fos/extract_date=2026-08-23/PROD_FOS_FLIGHTS_20260823_A52AAA66.parquet",
+      "file_name": "PROD_FOS_FLIGHTS_20260823_A52AAA66.parquet",
+      "row_count": 50,
+      "batch_id": "SKY20260823-A52AAA66",
+      "defects": [
+        "delayed_status_with_zero_delay",
+        "mixed_case_flight_status",
+        "arrived_flight_null_actual_departure"
+      ]
+    },
+    {
+      "source_system": "flight_ops",
+      "source_system_code": "fos",
+      "entity": "baggage",
+      "extract_mode": "full",
+      "extract_date": "2026-08-23",
+      "format": "jsonl",
+      "path": "data/tmp/module2_samples/sources/fos/extract_date=2026-08-23/PROD_FOS_BAGGAGE_20260823_A52AAA66.jsonl",
+      "file_name": "PROD_FOS_BAGGAGE_20260823_A52AAA66.jsonl",
+      "row_count": 2434,
+      "batch_id": "SKY20260823-A52AAA66",
+      "defects": [
+        "null_piece_count",
+        "undeclared_station_code_field"
+      ]
+    }
+  ]
+}

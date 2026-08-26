@@ -1,0 +1,29 @@
+{
+  "source_system": "booking",
+  "source_system_code": "pss",
+  "extract_date": "2026-08-23",
+  "extract_mode": "full",
+  "batch_id": "SKY20260823-A52AAA66",
+  "ingestion_timestamp": "2026-08-23T02:40:00+00:00",
+  "files": [
+    {
+      "source_system": "booking",
+      "source_system_code": "pss",
+      "entity": "bookings",
+      "extract_mode": "full",
+      "extract_date": "2026-08-23",
+      "format": "csv",
+      "path": "data/tmp/module2_samples/sources/pss/extract_date=2026-08-23/PROD_PSS_BOOKINGS_20260823_A52AAA66.csv",
+      "file_name": "PROD_PSS_BOOKINGS_20260823_A52AAA66.csv",
+      "row_count": 4439,
+      "batch_id": "SKY20260823-A52AAA66",
+      "defects": [
+        "pnr_trailing_whitespace",
+        "mixed_case_pnr_status",
+        "fare_prefixed_with_dollar_sign",
+        "orphan_passenger_id",
+        "duplicate_booking_rows"
+      ]
+    }
+  ]
+}

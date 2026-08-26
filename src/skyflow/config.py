@@ -96,3 +96,23 @@ def load_generator_config(path: str | Path) -> dict[str, Any]:
     run["output_root"] = os.getenv("SKYFLOW_OUTPUT_ROOT", run.get("output_root", "data/lake/raw"))
     run["output_format"] = os.getenv("SKYFLOW_OUTPUT_FORMAT", run.get("output_format", "parquet"))
     return cfg
+
+
+def load_sources_config(path: str | Path) -> dict[str, Any]:
+    """Module 2 source-system landing configuration."""
+    load_env()
+    cfg = deepcopy(_read_yaml(Path(path)))
+    run = cfg.setdefault("run", {})
+    run["output_root"] = os.getenv("SKYFLOW_SOURCES_ROOT", run.get("output_root", "data/sources"))
+    run.setdefault("generator_config", "config/generator.yaml")
+    run.setdefault("env", "PROD")
+    run.setdefault("mode", "window")
+    run.setdefault("apply_defects", True)
+    dates = run.get("extract_dates") or ["2026-08-23", "2026-08-24", "2026-08-25"]
+    if isinstance(dates, str):
+        dates = [part.strip() for part in dates.split(",") if part.strip()]
+    run["extract_dates"] = dates
+    cdc = cfg.setdefault("cdc", {})
+    cdc.setdefault("holdback_frac", 0.12)
+    cdc.setdefault("update_frac", 0.08)
+    return cfg

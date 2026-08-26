@@ -1,6 +1,6 @@
 # Running dependency list
 
-## Module 1 (installed)
+## Module 1–2 (installed)
 
 | Package | Used for |
 |---------|----------|

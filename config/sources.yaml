@@ -1,0 +1,18 @@
+# Module 2 — operational source-system landing (local; no S3)
+
+run:
+  generator_config: config/generator.yaml
+  output_root: data/sources
+  env: PROD
+  mode: window  # window | full | incremental
+  apply_defects: true
+  extract_dates:
+    - "2026-08-23"
+    - "2026-08-24"
+    - "2026-08-25"
+
+cdc:
+  # Share of rows withheld from the initial full extract and emitted on later days.
+  holdback_frac: 0.12
+  # Share of day-1 rows re-emitted later as updates (loyalty / status CDC).
+  update_frac: 0.08

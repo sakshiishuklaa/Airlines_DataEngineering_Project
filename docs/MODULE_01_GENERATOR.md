@@ -99,6 +99,6 @@ PY
 
 AWS console steps and `.env` keys: [AWS_SETUP.md](AWS_SETUP.md).
 
-## Exact next step (Module 2)
+## Exact next step (done in Module 2)
 
-**Local-to-S3 raw landing:** a boto3 uploader that mirrors `data/lake/raw/...` to `s3://$S3_LAKE_BUCKET/raw/...`, using `.env` for AWS profile/region/bucket, with logging, dry-run, and idempotent overwrite of the same `ingestion_date` prefix. No Glue jobs yet.
+Multi-system local source landing (`data/sources/…`). See [MODULE_02_SOURCE_LAYER.md](MODULE_02_SOURCE_LAYER.md). S3 is **not** part of Module 2.
