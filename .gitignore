@@ -22,6 +22,7 @@ build/
 # IDE
 .idea/
 .vscode/
+.cursor/rules/
 *.swp
 
 # Data lake and generated artifacts (large)
